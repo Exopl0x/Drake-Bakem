@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
 
     private bool canFire;
 
+    private AudioSource[] sounds;
+
     [Header("Shotgun Settings")]
     public GameObject bulletObject;
     public float bulletSpeed;
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour
         cldr = gameObject.GetComponent<CircleCollider2D>();
         gunTransform = gameObject.transform.Find("GunTransform");
         flamethrower = gameObject.transform.Find("GunTransform").GetComponent<ParticleSystem>();
+        sounds = gameObject.GetComponents<AudioSource>();
         canFire = true;
     }
 
@@ -68,11 +71,13 @@ public class PlayerController : MonoBehaviour
     IEnumerator FlamethrowerPlay()
     {
         flamethrower.Play();
+        sounds[0].Play();       // Flamethrower burn sound
         yield return null;
     }
     IEnumerator FlamethrowerStop()
     {
         flamethrower.Stop();
+        sounds[0].Stop();       // Flamethrower burn sound
         yield return null;
     }
 
@@ -94,23 +99,35 @@ public class PlayerController : MonoBehaviour
 
         canFire = false;
 
-        // Hitstop
+        // Hitstop, shots appear, but don't move
         Time.timeScale = 0.0f;
+        sounds[2].Play();       // Short, juicy prefire sound
         yield return new WaitForSecondsRealtime(0.1f);
-        Time.timeScale = 1.0f;
 
-        yield return new WaitForSecondsRealtime(shotgunCooldown);
+        // Shots move and shotgun is now shot
+        Time.timeScale = 1.0f;
+        sounds[1].Play();       // Shotgun blast sound effect
+
+        yield return new WaitForSecondsRealtime(shotgunCooldown * 0.7f);
+        sounds[3].Play();       // Shotgun pump 1
+
+        yield return new WaitForSecondsRealtime(shotgunCooldown * 0.3f);
+        // Shotgun can be fired again; charge time is finished.
         canFire = true;
+        sounds[4].Play();       // Shotgun pump 2
 
         yield return null;
     }
 
-    void OnTriggerEnter2D(Collider2D col){
-        if(col.gameObject.tag == "Cake"){
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Cake")
+        {
             //implement the player taking damage 
             col.gameObject.SetActive(false);
         }
-        if(col.gameObject.tag == "Cupcake"){
+        if (col.gameObject.tag == "Cupcake")
+        {
             //implement the player taking damage 
             col.gameObject.SetActive(false);
         }
