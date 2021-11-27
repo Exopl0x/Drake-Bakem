@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
 
     private bool canFire;
 
+    [SerializeField][Range(0,200)]
+    int playerHealth;
     private AudioSource[] sounds;
 
     [Header("Shotgun Settings")]
@@ -37,25 +39,33 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Point player towards mouse
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = (mousePosition - (Vector2)transform.position).normalized;
-
-        transform.right = direction;
-
-        // Shotgun (Right Click)
-        if (canFire == true && Input.GetMouseButtonDown(1))
+        if (playerHealth > 0)
         {
-            StartCoroutine(ShotgunShot());
+            // Point player towards mouse
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 direction = (mousePosition - (Vector2)transform.position).normalized;
+
+            transform.right = direction;
+
+            // Shotgun (Right Click)
+            if (canFire == true && Input.GetMouseButtonDown(1))
+            {
+                StartCoroutine(ShotgunShot());
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                StartCoroutine(FlamethrowerPlay());
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                StartCoroutine(FlamethrowerStop());
+            }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if(playerHealth <= 0)
         {
-            StartCoroutine(FlamethrowerPlay());
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            StartCoroutine(FlamethrowerStop());
+            GameObject.Find("Timer").GetComponent<Timer>().playerIsDead = true;
         }
     }
 
@@ -119,16 +129,13 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "Cake")
-        {
-            //implement the player taking damage 
+    void OnTriggerEnter2D(Collider2D col){
+        if(col.gameObject.tag == "Cake"){
+            playerHealth -= 10;
             col.gameObject.SetActive(false);
         }
-        if (col.gameObject.tag == "Cupcake")
-        {
-            //implement the player taking damage 
+        if(col.gameObject.tag == "Cupcake"){
+            playerHealth -= 5;
             col.gameObject.SetActive(false);
         }
     }
