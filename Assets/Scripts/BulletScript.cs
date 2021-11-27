@@ -23,4 +23,13 @@ public class BulletScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void OnTriggerEnter2D(Collider2D col){
+        if(col.gameObject.tag == "Cake"){
+            col.gameObject.SetActive(false);
+        }
+        if(col.gameObject.tag == "Cupcake"){
+            col.gameObject.SetActive(false);
+        }
+    }
 }
