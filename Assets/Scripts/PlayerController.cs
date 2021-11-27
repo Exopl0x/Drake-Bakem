@@ -6,10 +6,15 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private CircleCollider2D cldr;
+    private Transform gunTransform;
+    private ParticleSystem flamethrower;
 
     private bool canFire;
 
     [Header("Shotgun Settings")]
+    public GameObject bulletObject;
+    public float bulletSpeed;
+    public int noOfBullets;
     public float shotgunForce;
     public float shotgunCooldown;
 
@@ -21,6 +26,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         cldr = gameObject.GetComponent<CircleCollider2D>();
+        gunTransform = gameObject.transform.Find("GunTransform");
+        flamethrower = gameObject.transform.Find("GunTransform").GetComponent<ParticleSystem>();
         canFire = true;
     }
 
@@ -38,6 +45,15 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(ShotgunShot());
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(FlamethrowerPlay());
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            StartCoroutine(FlamethrowerStop());
+        }
     }
 
     void FixedUpdate()
@@ -49,10 +65,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    IEnumerator FlamethrowerPlay()
+    {
+        flamethrower.Play();
+        yield return null;
+    }
+    IEnumerator FlamethrowerStop()
+    {
+        flamethrower.Stop();
+        yield return null;
+    }
+
     IEnumerator ShotgunShot()
     {
         // Add force to player away from fire direction
         rb.AddForce(-transform.right * shotgunForce, ForceMode2D.Impulse);
+
+        Vector3 bulletSpawnPoint = new Vector3(gunTransform.position.x, gunTransform.position.y, 0);
+
+        GameObject _bulletInstance;
+        // Spawn bullets from gun
+        for (int i = 1; i <= 5; i++)
+        {
+            _bulletInstance = Instantiate(bulletObject, bulletSpawnPoint, Quaternion.FromToRotation(bulletObject.transform.up, transform.right));
+            _bulletInstance.transform.eulerAngles += new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, Random.Range(-20.0f, 20.0f));
+            _bulletInstance.GetComponent<Rigidbody2D>().AddForce(_bulletInstance.transform.up * bulletSpeed, ForceMode2D.Impulse);
+        }
 
         canFire = false;
 
