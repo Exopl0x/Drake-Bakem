@@ -104,4 +104,15 @@ public class PlayerController : MonoBehaviour
 
         yield return null;
     }
+
+    void OnTriggerEnter2D(Collider2D col){
+        if(col.gameObject.tag == "Cake"){
+            //implement the player taking damage 
+            col.gameObject.SetActive(false);
+        }
+        if(col.gameObject.tag == "Cupcake"){
+            //implement the player taking damage 
+            col.gameObject.SetActive(false);
+        }
+    }
 }

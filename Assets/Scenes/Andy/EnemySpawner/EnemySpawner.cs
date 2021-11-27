@@ -58,7 +58,7 @@ public class EnemySpawner : MonoBehaviour
         for(int i = 0; i < CakePooler._Instance.cakesPerWave; i++){ //spawning them in waves of 5's
             GameObject cake = CakePooler._Instance.SpawnCake();
             if(cake == null) return;
-            var position = new Vector3(Random.Range(-8.0f, 8.0f), Random.Range(-4.0f, 4.0f), 0);
+            var position = new Vector3(Random.Range(-8.5f, 8.5f), Random.Range(-4.5f, 4.5f), 0);
             // cake.transform.position = new Vector3 (enemySpawner.transform.position.x, enemySpawner.transform.position.y, enemySpawner.transform.position.z);
             cake.transform.position = position;
             cake.SetActive(true);
@@ -70,7 +70,7 @@ public class EnemySpawner : MonoBehaviour
         for(int i = 0; i < CupcakePooler._Instance.cupcakesPerWave;i++){
             GameObject cupcake = CupcakePooler._Instance.SpawnCupcake();
             if(cupcake == null) return;
-            var position = new Vector3(Random.Range(-8.0f, 8.0f), Random.Range(-4.0f, 4.0f), 0);
+            var position = new Vector3(Random.Range(-8.5f, 8.5f), Random.Range(-4.5f, 4.5f), 0);
             cupcake.transform.position = position;
             cupcake.SetActive(true);
         }
