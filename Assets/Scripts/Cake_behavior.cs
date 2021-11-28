@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Cake_behavior : MonoBehaviour
 {
-    [SerializeField] Transform playerPosition;
+    [SerializeField] Transform playerTransform;
     [SerializeField] float movementSpeed;
+    
+
     void Update()
     {
-       transform.position = Vector2.MoveTowards(this.transform.position, playerPosition.position, movementSpeed * Time.deltaTime);
+        transform.right = playerTransform.position - transform.position;
+
+        transform.position = Vector2.MoveTowards(this.transform.position, playerTransform.position, movementSpeed * Time.deltaTime);
     }
 }

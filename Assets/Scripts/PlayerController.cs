@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
 
     private bool canFire;
 
+    [SerializeField][Range(0,200)]
+    int playerHealth;
+    private AudioSource[] sounds;
+
     [Header("Shotgun Settings")]
     public GameObject bulletObject;
     public float bulletSpeed;
@@ -28,31 +32,40 @@ public class PlayerController : MonoBehaviour
         cldr = gameObject.GetComponent<CircleCollider2D>();
         gunTransform = gameObject.transform.Find("GunTransform");
         flamethrower = gameObject.transform.Find("GunTransform").GetComponent<ParticleSystem>();
+        sounds = gameObject.GetComponents<AudioSource>();
         canFire = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Point player towards mouse
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = (mousePosition - (Vector2)transform.position).normalized;
-
-        transform.right = direction;
-
-        // Shotgun (Right Click)
-        if (canFire == true && Input.GetMouseButtonDown(1))
+        if (playerHealth > 0)
         {
-            StartCoroutine(ShotgunShot());
+            // Point player towards mouse
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 direction = (mousePosition - (Vector2)transform.position).normalized;
+
+            transform.right = direction;
+
+            // Shotgun (Right Click)
+            if (canFire == true && Input.GetMouseButtonDown(1))
+            {
+                StartCoroutine(ShotgunShot());
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                StartCoroutine(FlamethrowerPlay());
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                StartCoroutine(FlamethrowerStop());
+            }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if(playerHealth <= 0)
         {
-            StartCoroutine(FlamethrowerPlay());
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            StartCoroutine(FlamethrowerStop());
+            GameObject.Find("Timer").GetComponent<Timer>().playerIsDead = true;
         }
     }
 
@@ -68,11 +81,13 @@ public class PlayerController : MonoBehaviour
     IEnumerator FlamethrowerPlay()
     {
         flamethrower.Play();
+        sounds[0].Play();       // Flamethrower burn sound
         yield return null;
     }
     IEnumerator FlamethrowerStop()
     {
         flamethrower.Stop();
+        sounds[0].Stop();       // Flamethrower burn sound
         yield return null;
     }
 
@@ -94,24 +109,33 @@ public class PlayerController : MonoBehaviour
 
         canFire = false;
 
-        // Hitstop
+        // Hitstop, shots appear, but don't move
         Time.timeScale = 0.0f;
+        sounds[2].Play();       // Short, juicy prefire sound
         yield return new WaitForSecondsRealtime(0.1f);
-        Time.timeScale = 1.0f;
 
-        yield return new WaitForSecondsRealtime(shotgunCooldown);
+        // Shots move and shotgun is now shot
+        Time.timeScale = 1.0f;
+        sounds[1].Play();       // Shotgun blast sound effect
+
+        yield return new WaitForSecondsRealtime(shotgunCooldown * 0.7f);
+        sounds[3].Play();       // Shotgun pump 1
+
+        yield return new WaitForSecondsRealtime(shotgunCooldown * 0.3f);
+        // Shotgun can be fired again; charge time is finished.
         canFire = true;
+        sounds[4].Play();       // Shotgun pump 2
 
         yield return null;
     }
 
     void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.tag == "Cake"){
-            //implement the player taking damage 
+            playerHealth -= 10;
             col.gameObject.SetActive(false);
         }
         if(col.gameObject.tag == "Cupcake"){
-            //implement the player taking damage 
+            playerHealth -= 5;
             col.gameObject.SetActive(false);
         }
     }
