@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using MoreMountains.Tools;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
@@ -132,10 +132,12 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.tag == "Cake"){
             playerHealth -= 10;
+            GameObject.Find("HealthBar").GetComponent<MMHealthBar>().UpdateBar(playerHealth, 0, 200, true);
             col.gameObject.SetActive(false);
         }
         if(col.gameObject.tag == "Cupcake"){
             playerHealth -= 5;
+            GameObject.Find("HealthBar").GetComponent<MMHealthBar>().UpdateBar(playerHealth, 0, 200, true);
             col.gameObject.SetActive(false);
         }
     }
