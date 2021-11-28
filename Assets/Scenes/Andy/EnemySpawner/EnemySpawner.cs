@@ -31,8 +31,8 @@ public class EnemySpawner : MonoBehaviour
 
 
     //temp for health bar making
-        currentHealth = 1;
-        healthBar.SetMaxHealth(maxHealth);
+        // currentHealth = 1;
+        // healthBar.SetMaxHealth(maxHealth);
     }
     // Update is called once per frame
     void Update()
@@ -44,15 +44,15 @@ public class EnemySpawner : MonoBehaviour
             SpawnEnemies();
         }
 
-        if(Input.GetKeyDown(KeyCode.Space)){
-            TakeDamage(1);
-        }
+        // if(Input.GetKeyDown(KeyCode.Space)){
+        //     TakeDamage(1);
+        // }
     }
     //temp for health bar making
-    void TakeDamage(int damage){
-        currentHealth += damage;
-        healthBar.SetHealth(currentHealth);
-    }
+    // void TakeDamage(int damage){
+    //     currentHealth += damage;
+    //     healthBar.SetHealth(currentHealth);
+    // }
     public void SpawnEnemies(){
         if(startedGame){
             GetCake();

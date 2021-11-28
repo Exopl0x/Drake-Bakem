@@ -7,17 +7,17 @@ public class FlamethrowerCooking : MonoBehaviour
 
     public CakeStats stats;
     // public GameObject cake; // assigned to the cake and cupcake
-    [SerializeField] int maxHealth, damage;
-    int currentHealth;
+    [SerializeField] float maxHitToCook, damage;
+    public static float currentHits;
 
     
     // Start is called before the first frame update
     void Start()
     {
-        maxHealth = stats.health;
-        currentHealth = maxHealth;
+        maxHitToCook = stats.cookedHits;
+        currentHits = 0.0f;
         damage = stats.damage;
-
+        Debug.Log(maxHitToCook);
     }
 
     // Update is called once per frame
@@ -26,15 +26,17 @@ public class FlamethrowerCooking : MonoBehaviour
         
     }
     private void OnParticleCollision(GameObject other){
-       TakeDamage(5);
-        /// decrease cake health and UI 
-        if (currentHealth <= 0)
+       TakeDamage(0.1f); // flamethrower damage goes here
+        /// increase cake health and UI to show that the cake is now cooked
+        if (currentHits >= maxHitToCook){
+            Debug.Log("CONDITION MET KILLING");
             gameObject.SetActive(false);
-
-       
-        
+        }  
     }
-    void TakeDamage(int damage){
-        currentHealth -= damage;
+
+
+    void TakeDamage(float damage){
+        currentHits += damage;
+
     }
 }

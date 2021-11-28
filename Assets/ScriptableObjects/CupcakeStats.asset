@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba310b85dedb4e4dbc7cbc1b8984366, type: 3}
   m_Name: CupcakeStats
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 6985763298279631735, guid: d760dc130948d954f8c077aa1e6c4c73,
-    type: 3}
-  health: 1
+  cookedHits: 1
   damage: 1
