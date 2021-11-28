@@ -15,12 +15,24 @@ public class EnemySpawner : MonoBehaviour
     private bool startedGame = true;
 
     private GameObject[] activeCakes;
+
+
+
+    //temp field
+    public HealthBar healthBar;
+    public int currentHealth;
+    public int maxHealth = 100;
     // Start is called before the first frame update
     void Start()
     {
         _Instance = this;  
         timerResetCake = delayTimerCake; 
         timerResetCupcake = delayTimerCupcake;
+
+
+    //temp for health bar making
+        currentHealth = 1;
+        healthBar.SetMaxHealth(maxHealth);
     }
     // Update is called once per frame
     void Update()
@@ -31,6 +43,15 @@ public class EnemySpawner : MonoBehaviour
         if(!canSpawn){
             SpawnEnemies();
         }
+
+        if(Input.GetKeyDown(KeyCode.Space)){
+            TakeDamage(1);
+        }
+    }
+    //temp for health bar making
+    void TakeDamage(int damage){
+        currentHealth += damage;
+        healthBar.SetHealth(currentHealth);
     }
     public void SpawnEnemies(){
         if(startedGame){
