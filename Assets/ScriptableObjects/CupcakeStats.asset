@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba310b85dedb4e4dbc7cbc1b8984366, type: 3}
   m_Name: CupcakeStats
   m_EditorClassIdentifier: 
-  cookedHits: 25
+  cookedHits: 5
   damage: 1
   cookedBread: {fileID: 21300000, guid: 804c28fdbacbc0b41834cf17880536ba, type: 3}
   rawBread: {fileID: 21300000, guid: 32877483678a1e44aab7d87abb04df2d, type: 3}
