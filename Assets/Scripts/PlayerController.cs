@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using MoreMountains.Tools;
+using TMPro;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public float shotgunForce;
     public float shotgunCooldown;
     public GameObject score;
-
+    public TextMeshProUGUI deathS;
     [Header("Flamethrower Settings")]
     public float flamethrowerForce;
     public CakeStats cake;
@@ -76,6 +77,12 @@ public class PlayerController : MonoBehaviour
             //GameObject.Find("Timer").GetComponent<Timer>().playerIsDead = true;
 
             deathCanvas.SetActive(true);
+            score.SetActive(false);
+            Debug.Log(score.GetComponent<Score>().score);
+            GameObject.Find("DeathScore").GetComponent<TextMeshProUGUI>().text = score.GetComponent<Score>().score.ToString();
+            
+            
+            
         }
     }
 
