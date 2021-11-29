@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cake
   - Cupcake
+  - GroundDecor
   layers:
   - Default
   - TransparentFX
