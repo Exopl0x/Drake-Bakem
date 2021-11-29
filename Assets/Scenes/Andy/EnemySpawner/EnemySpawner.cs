@@ -15,12 +15,16 @@ public class EnemySpawner : MonoBehaviour
     private bool startedGame = true;
 
     private GameObject[] activeCakes;
+    public CakeStats cakeSettings;
+    public CakeStats cupCakeSettings;
+
     // Start is called before the first frame update
     void Start()
     {
         _Instance = this;  
         timerResetCake = delayTimerCake; 
         timerResetCupcake = delayTimerCupcake;
+
     }
     // Update is called once per frame
     void Update()
@@ -31,6 +35,7 @@ public class EnemySpawner : MonoBehaviour
         if(!canSpawn){
             SpawnEnemies();
         }
+
     }
     public void SpawnEnemies(){
         if(startedGame){
@@ -61,8 +66,10 @@ public class EnemySpawner : MonoBehaviour
             var position = new Vector3(Random.Range(-8.5f, 8.5f), Random.Range(-4.5f, 4.5f), 0);
             // cake.transform.position = new Vector3 (enemySpawner.transform.position.x, enemySpawner.transform.position.y, enemySpawner.transform.position.z);
             cake.transform.position = position;
-            cake.SetActive(true);
-
+            cake.GetComponent<SpriteRenderer>().sprite = cakeSettings.rawBread;
+            cake.GetComponent<CircleCollider2D>().enabled = true;
+            cake.GetComponent<Cake_behavior>().canMove = true;
+            StartCoroutine(DelaySpawn(cake, .3f));
         }
     }
 
@@ -72,7 +79,14 @@ public class EnemySpawner : MonoBehaviour
             if(cupcake == null) return;
             var position = new Vector3(Random.Range(-8.5f, 8.5f), Random.Range(-4.5f, 4.5f), 0);
             cupcake.transform.position = position;
-            cupcake.SetActive(true);
+            cupcake.GetComponent<SpriteRenderer>().sprite = cupCakeSettings.rawBread;
+            cupcake.GetComponent<CircleCollider2D>().enabled = true;
+            cupcake.GetComponent<Cake_behavior>().canMove = true;
+            StartCoroutine(DelaySpawn(cupcake,.2f));
         }
+    }
+    IEnumerator DelaySpawn(GameObject bread, float delayTime){
+        yield return new WaitForSeconds(delayTime);
+        bread.SetActive(true);
     }
 }
