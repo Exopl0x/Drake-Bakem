@@ -43,7 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec21066ac8ec0c45b45c02344d525f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawner: {fileID: 0}
+  enemySpawner: {fileID: 5958406666580064619, guid: b29f70be2f1ba5c4f9f3d08039bd6e6d,
+    type: 3}
   cakeObj: {fileID: 4815054872875759273, guid: e521690ad12881f41a3ea0e528f16622, type: 3}
   cakesPerWave: 5
   totalCakesToSpawn: 20

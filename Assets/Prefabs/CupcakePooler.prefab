@@ -43,7 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7876d78546a1bbd409836b1c428ea11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawner: {fileID: 0}
+  enemySpawner: {fileID: 5958406666580064619, guid: b29f70be2f1ba5c4f9f3d08039bd6e6d,
+    type: 3}
   cupcakeObj: {fileID: 3643652620460713846, guid: c8bd451492f813e44ba28e243a509cbb,
     type: 3}
   cupcakesPerWave: 10

@@ -8,8 +8,8 @@ public class RotationLock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         this.GetComponent<Rigidbody2D>().freezeRotation = true;
-         
+        //this.GetComponent<Rigidbody2D>().freezeRotation = true;
+
     }
 
     private void Update()
