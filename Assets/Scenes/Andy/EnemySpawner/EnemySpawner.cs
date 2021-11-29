@@ -80,6 +80,7 @@ public class EnemySpawner : MonoBehaviour
             cake.GetComponent<SpriteRenderer>().sprite = cakeSettings.rawBread;
             cake.GetComponent<CircleCollider2D>().enabled = true;
             cake.GetComponent<Cake_behavior>().canMove = true;
+            cake.GetComponent<FlamethrowerCooking>().currentHits = 0f;
             StartCoroutine(DelaySpawn(cake, .3f));
         }
     }
@@ -95,6 +96,7 @@ public class EnemySpawner : MonoBehaviour
             cupcake.GetComponent<SpriteRenderer>().sprite = cupCakeSettings.rawBread;
             cupcake.GetComponent<CircleCollider2D>().enabled = true;
             cupcake.GetComponent<Cake_behavior>().canMove = true;
+            cupcake.GetComponent<FlamethrowerCooking>().currentHits = 0f;
             StartCoroutine(DelaySpawn(cupcake, .2f));
         }
     }
