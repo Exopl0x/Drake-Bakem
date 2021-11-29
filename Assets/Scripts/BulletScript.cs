@@ -30,7 +30,7 @@ public class BulletScript : MonoBehaviour
         if (col.gameObject.tag == "Cake")
         {
             col.gameObject.SetActive(false);
-            score.GetComponent<Score>().score -= 5;
+            score.GetComponent<Score>().score -= 2;
         }
         if (col.gameObject.tag == "Cupcake")
         {
