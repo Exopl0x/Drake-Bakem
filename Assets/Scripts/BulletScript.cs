@@ -7,10 +7,11 @@ public class BulletScript : MonoBehaviour
     public float timeOutLength;
 
     private float startTime = 0;
+    GameObject score;
     // Start is called before the first frame update
     void Start()
     {
-
+        score = GameObject.Find("Score");
     }
 
     // Update is called once per frame
@@ -27,9 +28,11 @@ public class BulletScript : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.tag == "Cake"){
             col.gameObject.SetActive(false);
+            score.GetComponent<Score>().score -= 2;
         }
         if(col.gameObject.tag == "Cupcake"){
             col.gameObject.SetActive(false);
+            score.GetComponent<Score>().score -= 1;
         }
     }
 }
