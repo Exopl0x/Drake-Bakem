@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.tag == "Cake")
         {
             playerHealth -= cake.damage;
-            GameObject.Find("Health_Bar").GetComponent<MMHealthBar>().UpdateBar(playerHealth, 0, 200, true);
+            GameObject.Find("Health_Bar").GetComponent<MMHealthBar>().UpdateBar(playerHealth, 0, 50, true);
             col.gameObject.SetActive(false);
             GameObject.Find("Score").GetComponent<Score>().score -= 2;
 
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.tag == "Cupcake")
         {
             playerHealth -= cupcake.damage;
-            GameObject.Find("Health_Bar").GetComponent<MMHealthBar>().UpdateBar(playerHealth, 0, 200, true);
+            GameObject.Find("Health_Bar").GetComponent<MMHealthBar>().UpdateBar(playerHealth, 0, 50, true);
             col.gameObject.SetActive(false);
             GameObject.Find("Score").GetComponent<Score>().score -= 1;
         }
