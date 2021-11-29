@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using MoreMountains.Tools;
 public class PlayerController : MonoBehaviour
@@ -8,10 +9,12 @@ public class PlayerController : MonoBehaviour
     private CircleCollider2D cldr;
     private Transform gunTransform;
     private ParticleSystem flamethrower;
+    public MMFeedbacks shotgunFeedbacks;
 
     private bool canFire;
 
-    [SerializeField][Range(0,200)]
+    [SerializeField]
+    [Range(0, 200)]
     int playerHealth;
     private AudioSource[] sounds;
 
@@ -33,6 +36,7 @@ public class PlayerController : MonoBehaviour
         gunTransform = gameObject.transform.Find("GunTransform");
         flamethrower = gameObject.transform.Find("GunTransform").GetComponent<ParticleSystem>();
         sounds = gameObject.GetComponents<AudioSource>();
+        shotgunFeedbacks = GameObject.Find("Main Camera").GetComponent<MMFeedbacks>();
         canFire = true;
     }
 
@@ -63,10 +67,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(playerHealth <= 0)
-        {
-            GameObject.Find("Timer").GetComponent<Timer>().playerIsDead = true;
-        }
+        //if(playerHealth <= 0)
+        //{
+        //    GameObject.Find("Timer").GetComponent<Timer>().playerIsDead = true;
+        //}
     }
 
     void FixedUpdate()
@@ -117,6 +121,8 @@ public class PlayerController : MonoBehaviour
         // Shots move and shotgun is now shot
         Time.timeScale = 1.0f;
         sounds[1].Play();       // Shotgun blast sound effect
+        shotgunFeedbacks?.PlayFeedbacks();
+
 
         yield return new WaitForSecondsRealtime(shotgunCooldown * 0.7f);
         sounds[3].Play();       // Shotgun pump 1
@@ -129,13 +135,16 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
-    void OnTriggerEnter2D(Collider2D col){
-        if(col.gameObject.tag == "Cake"){
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Cake")
+        {
             playerHealth -= 10;
             GameObject.Find("HealthBar").GetComponent<MMHealthBar>().UpdateBar(playerHealth, 0, 200, true);
             col.gameObject.SetActive(false);
         }
-        if(col.gameObject.tag == "Cupcake"){
+        if (col.gameObject.tag == "Cupcake")
+        {
             playerHealth -= 5;
             GameObject.Find("HealthBar").GetComponent<MMHealthBar>().UpdateBar(playerHealth, 0, 200, true);
             col.gameObject.SetActive(false);
