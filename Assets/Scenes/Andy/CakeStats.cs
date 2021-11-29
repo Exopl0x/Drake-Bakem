@@ -7,7 +7,7 @@ using UnityEngine;
 public class CakeStats : ScriptableObject
 {
     public float cookedHits; //how many times it has to be hit to be cooked
-    public float damage;
+    public int damage;
     public Sprite cookedBread;
     public Sprite rawBread;
 }
