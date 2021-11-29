@@ -141,12 +141,12 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        sounds[5].Play();
         if (col.gameObject.tag == "Cake")
         {
             playerHealth -= cake.damage;
             GameObject.Find("Health_Bar").GetComponent<MMHealthBar>().UpdateBar(playerHealth, 0, 50, true);
             col.gameObject.SetActive(false);
-            GameObject.Find("Score").GetComponent<Score>().score -= 2;
 
         }
         if (col.gameObject.tag == "Cupcake")
@@ -154,7 +154,6 @@ public class PlayerController : MonoBehaviour
             playerHealth -= cupcake.damage;
             GameObject.Find("Health_Bar").GetComponent<MMHealthBar>().UpdateBar(playerHealth, 0, 50, true);
             col.gameObject.SetActive(false);
-            GameObject.Find("Score").GetComponent<Score>().score -= 1;
         }
     }
 }

@@ -25,12 +25,15 @@ public class BulletScript : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter2D(Collider2D col){
-        if(col.gameObject.tag == "Cake"){
+    public void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Cake")
+        {
             col.gameObject.SetActive(false);
-            score.GetComponent<Score>().score -= 2;
+            score.GetComponent<Score>().score -= 5;
         }
-        if(col.gameObject.tag == "Cupcake"){
+        if (col.gameObject.tag == "Cupcake")
+        {
             col.gameObject.SetActive(false);
             score.GetComponent<Score>().score -= 1;
         }
