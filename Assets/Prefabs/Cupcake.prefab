@@ -120,9 +120,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0011515617, y: 0}
+  m_Offset: {x: -0.06242895, y: 0.0378803}
   serializedVersion: 2
-  m_Radius: 0.24840546
+  m_Radius: 0.3431064
 --- !u!114 &3643652620460713843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,3 +153,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
   movementSpeed: 1
+  canMove: 1

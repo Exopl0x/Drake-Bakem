@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 783797761}
   m_Layer: 0
   m_Name: GroundDecor
-  m_TagString: Untagged
+  m_TagString: GroundDecor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46121,7 +46121,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -46755,12 +46755,12 @@ PrefabInstance:
     - target: {fileID: 4921775866498475802, guid: c9e64b58afd02214bad87556da45743b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.233
       objectReference: {fileID: 0}
     - target: {fileID: 4921775866498475802, guid: c9e64b58afd02214bad87556da45743b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.264
       objectReference: {fileID: 0}
     - target: {fileID: 4921775866498475802, guid: c9e64b58afd02214bad87556da45743b,
         type: 3}
@@ -46802,6 +46802,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4921775866498475877, guid: c9e64b58afd02214bad87556da45743b,
+        type: 3}
+      propertyPath: cake
+      value: 
+      objectReference: {fileID: 11400000, guid: 04761e0d835849f46b0001dc036f48ce,
+        type: 2}
+    - target: {fileID: 4921775866498475877, guid: c9e64b58afd02214bad87556da45743b,
+        type: 3}
+      propertyPath: cupcake
+      value: 
+      objectReference: {fileID: 11400000, guid: 50cf6ab003f3bb442b7b683b63e5dd7f,
+        type: 2}
     - target: {fileID: 7379306770130832375, guid: c9e64b58afd02214bad87556da45743b,
         type: 3}
       propertyPath: m_SortingOrder

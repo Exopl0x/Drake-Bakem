@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Flamethrower Settings")]
     public float flamethrowerForce;
-
+    public CakeStats cake;
+    public CakeStats cupcake;
     // Start is called before the first frame update
     void Start()
     {
@@ -136,20 +137,20 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Cake")
         {
-            playerHealth -= 10;
-            GameObject.Find("HealthBar").GetComponent<MMHealthBar>().UpdateBar(playerHealth, 0, 200, true);
+            playerHealth -= cake.damage;
+            GameObject.Find("Health_Bar").GetComponent<MMHealthBar>().UpdateBar(playerHealth, 0, 200, true);
             col.gameObject.SetActive(false);
             GameObject.Find("Score").GetComponent<Score>().score -= 2;
 
         }
         if (col.gameObject.tag == "Cupcake")
         {
-            playerHealth -= 5;
-            GameObject.Find("HealthBar").GetComponent<MMHealthBar>().UpdateBar(playerHealth, 0, 200, true);
+            playerHealth -= cupcake.damage;
+            GameObject.Find("Health_Bar").GetComponent<MMHealthBar>().UpdateBar(playerHealth, 0, 200, true);
             col.gameObject.SetActive(false);
             GameObject.Find("Score").GetComponent<Score>().score -= 1;
         }
