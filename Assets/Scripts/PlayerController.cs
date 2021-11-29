@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private Transform gunTransform;
     private ParticleSystem flamethrower;
     public MMFeedbacks shotgunFeedbacks;
+    public GameObject deathCanvas;
 
     private bool canFire;
 
@@ -69,10 +70,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //if(playerHealth <= 0)
-        //{
-        //    GameObject.Find("Timer").GetComponent<Timer>().playerIsDead = true;
-        //}
+        if(playerHealth <= 0)
+        {
+           //GameObject.Find("Timer").GetComponent<Timer>().playerIsDead = true;
+            deathCanvas.SetActive(true);
+        }
     }
 
     void FixedUpdate()
