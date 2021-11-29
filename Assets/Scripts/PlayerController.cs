@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
         flamethrower = gameObject.transform.Find("GunTransform").GetComponent<ParticleSystem>();
         sounds = gameObject.GetComponents<AudioSource>();
         shotgunFeedbacks = GameObject.Find("Main Camera").GetComponent<MMFeedbacks>();
+        deathCanvas.SetActive(false);
         canFire = true;
     }
 
@@ -70,9 +71,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(playerHealth <= 0)
+        if (playerHealth <= 0)
         {
-           //GameObject.Find("Timer").GetComponent<Timer>().playerIsDead = true;
+            //GameObject.Find("Timer").GetComponent<Timer>().playerIsDead = true;
+
             deathCanvas.SetActive(true);
         }
     }

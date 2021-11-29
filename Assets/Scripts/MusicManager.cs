@@ -5,12 +5,23 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
     private AudioSource[] musics;
-    public AudioClip intro;
+    public GameObject deathCanvas;
+    private bool notDead = true;
 
     void Awake()
     {
         musics = gameObject.GetComponents<AudioSource>();
+        deathCanvas = GameObject.Find("DeathCanvas");
         StartCoroutine(PlayMusic());
+    }
+
+    void Update()
+    {
+        if (notDead && deathCanvas.activeSelf)
+        {
+            StartCoroutine(DeathMusic());
+            notDead = false;
+        }
     }
 
     IEnumerator PlayMusic()
@@ -22,6 +33,14 @@ public class MusicManager : MonoBehaviour
         yield return new WaitUntil(() => !musics[1].isPlaying);
         musics[0].Play();
 
+        yield return null;
+    }
+
+    IEnumerator DeathMusic()
+    {
+        musics[0].Stop();
+        musics[2].Play();
+        Time.timeScale = 0.1f;
         yield return null;
     }
 }
