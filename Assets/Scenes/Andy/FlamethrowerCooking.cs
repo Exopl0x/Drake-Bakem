@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 
 public class FlamethrowerCooking : MonoBehaviour
@@ -11,6 +12,8 @@ public class FlamethrowerCooking : MonoBehaviour
     [SerializeField] float maxHitToCook, damage;
     public static float currentHits;
     public Sprite cookedCupcake;
+    public Score scoreBox;
+
 
     
     // Start is called before the first frame update
@@ -19,6 +22,7 @@ public class FlamethrowerCooking : MonoBehaviour
         maxHitToCook = stats.cookedHits;
         currentHits = 0.0f;
         damage = stats.damage;
+        scoreBox = GameObject.Find("Score").GetComponent<Score>();
     }
 
     // Update is called once per frame
@@ -34,10 +38,13 @@ public class FlamethrowerCooking : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().sprite = cookedCupcake;
                 gameObject.GetComponent<CircleCollider2D>().enabled = false;
                 gameObject.GetComponent<Cake_behavior>().canMove = false;
+                scoreBox.score += 1;
                 // gameObject.GetComponent<Transform>()
-            }else if(gameObject.tag == "Cake"){
+            }
+            else if(gameObject.tag == "Cake"){
                 gameObject.GetComponent<SpriteRenderer>().sprite = stats.cookedBread;
                 gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                scoreBox.score += 2;
                 gameObject.GetComponent<Cake_behavior>().canMove = false;
             }
             StartCoroutine(Delay());
